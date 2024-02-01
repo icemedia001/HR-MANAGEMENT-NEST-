@@ -1,10 +1,10 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { AuthService } from './auth.service';
-import { userService } from '../user/user.service';
-import { JwtModule } from '@nestjs/jwt';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { Test, TestingModule } from "@nestjs/testing";
+import { AuthService } from "./auth.service";
+import { UserService } from "../User/User.service";
+import { JwtModule } from "@nestjs/jwt";
+import { ConfigModule, ConfigService } from "@nestjs/config";
 
-describe('AuthService', () => {
+describe("AuthService", () => {
   let service: AuthService;
 
   beforeEach(async () => {
@@ -23,17 +23,23 @@ describe('AuthService', () => {
           }
         }),
       ],
-      providers: [AuthService, userService],
+      providers: [AuthService, UserService],
     }).compile();
 
     service = module.get<AuthService>(AuthService);
   });
 
-  it('should be defined', () => {
+  it("should be defined", () => {
     expect(service).toBeDefined();
   });
-  it('should validate correct credentials', async () => {
-    const result = await service.signIn('azim', 'changeme')
+  it("should validate correct credentials", async () => {
+    const result = await service.signIn("john", "changeme")
+    expect(result.username).toEqual("john");
+    console.log(result)
+  })
+  it("should validate correct credentials", async () => {
+    const result = await service.signIn("azim", "changeme")
     expect(result).toBeNull();
+    console.log(result)
   })
 });

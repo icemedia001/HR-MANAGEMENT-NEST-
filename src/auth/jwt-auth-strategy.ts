@@ -4,17 +4,6 @@ import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 
 @Injectable() 
-
-
-
-
-
-
-
-
-
-
-\45
 export class JWTAuthStrategy extends PassportStrategy(Strategy){
     constructor(
         private readonly configService: ConfigService
@@ -28,6 +17,6 @@ export class JWTAuthStrategy extends PassportStrategy(Strategy){
     }
 
         async validate(payload: any){
-            return {userId: payload.sub, username: payload.username }
+            return {UserId: payload.sub, username: payload.username }
         }
 }
